@@ -10,9 +10,10 @@ import { MaterialModule } from './material/material.module';
 import { MenuComponent } from './Components/menu/menu.component';
 import { IndexFlightsComponent } from './View/flight/index-flights/index-flights.component';
 import { DialogConfirmComponent } from './Components/dialog-confirm/dialog-confirm.component';
+import { LoadGenericListComponent } from './Components/load-generic-list/load-generic-list.component';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, IndexFlightsComponent],
+  declarations: [AppComponent, MenuComponent, IndexFlightsComponent, LoadGenericListComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

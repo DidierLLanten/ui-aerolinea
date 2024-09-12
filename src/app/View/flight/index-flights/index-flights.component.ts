@@ -7,6 +7,7 @@ import { flightDTO } from 'src/app/Interfaces/flight';
 import { HttpResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmService } from 'src/app/Service/dialog-confirm.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-index-flights',
@@ -38,6 +39,7 @@ export class IndexFlightsComponent implements OnInit {
   ];
   flights = new MatTableDataSource<flightDTO>();
   flight: flightDTO | undefined;
+  isLoading = true; // Bandera para el estado de carga
 
   ngOnInit(): void {
     this.loadRecords();
@@ -49,10 +51,12 @@ export class IndexFlightsComponent implements OnInit {
   }
 
   loadRecords() {
-    this.service.getAll().subscribe((response: HttpResponse<flightDTO[]>) => {
+    this.isLoading = true;
+    this.service.getAll().pipe(delay(6000)).subscribe((response: HttpResponse<flightDTO[]>) => {
       this.flights.data = response.body ?? [];
       this.flights.paginator = this.paginator;
       this.flights.sort = this.sort;
+      this.isLoading = false; // Desactivar el estado de carga
     });
   }
 
