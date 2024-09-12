@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { IndexFlightsComponent } from './View/flight/index-flights/index-flights.component';
 
 const routes: Routes = [
+  { path: '', component: IndexFlightsComponent }, 
+  { path: 'flights', component: IndexFlightsComponent }, 
+  { path: 'flights/edit/:id', component: IndexFlightsComponent }, 
+
   { path: '**', redirectTo: '' },
 ];
 
