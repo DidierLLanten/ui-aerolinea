@@ -9,7 +9,7 @@
         <div class="col">
           <mat-form-field class="full-width">            
             <mat-select placeholder="Airline" formControlName="airline">
-              <mat-option *ngFor="let airline of airlines" [value]="airline.codeIATA">
+              <mat-option *ngFor="let airline of airlines" [value]="airline.name">
                 {{ airline.name }}
               </mat-option>
             </mat-select>

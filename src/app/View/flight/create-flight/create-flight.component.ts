@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { cityDTO } from 'src/app/Interfaces/city';
-import { flightCreationDTO2 } from 'src/app/Interfaces/flight';
+import { flightCreationDTO } from 'src/app/Interfaces/flight';
 import { FlightsService } from 'src/app/Service/flights.service';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
@@ -175,7 +175,7 @@ export class CreateFlightComponent {
     ? arrivalDateTime.toISOString()
     : null;
 
-    const flight : flightCreationDTO2 = formValues;
+    const flight : flightCreationDTO = formValues;
     flight.departureTime = departureDateTimeString;
     flight.arrivalTime = arrivalDateTimeString;
 
