@@ -13,6 +13,8 @@ import { DialogConfirmComponent } from './Components/dialog-confirm/dialog-confi
 import { LoadGenericListComponent } from './Components/load-generic-list/load-generic-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateFlightComponent } from './View/flight/create-flight/create-flight.component';
+import { FormFlightComponent } from './View/flight/form-flight/form-flight.component';
+import { EditFlightComponent } from './View/flight/edit-flight/edit-flight.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { CreateFlightComponent } from './View/flight/create-flight/create-flight
     IndexFlightsComponent,
     LoadGenericListComponent,
     CreateFlightComponent,
+    FormFlightComponent,
+    EditFlightComponent,
   ],
   imports: [
     BrowserModule,

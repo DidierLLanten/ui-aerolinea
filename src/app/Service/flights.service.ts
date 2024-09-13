@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/enviroment';
-import { flightCreationDTO, flightDTO } from '../Interfaces/flight';
+import { flightCreationDTO, flightDTO, flightEditDTO } from '../Interfaces/flight';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +24,7 @@ export class FlightsService {
     });
   }
 
-  public create(flight: flightCreationDTO) {
-    console.log('Servicio Crear vuelo');
+  public create(flight: flightCreationDTO) {    
     return this.http.post<any>(this.apiURL, flight, {
       observe: 'response',
     }).pipe(
@@ -37,6 +36,14 @@ export class FlightsService {
     return this.http.get<flightDTO>(this.apiURL + '/' + id, {
       observe: 'response',
     });
+  }
+
+  public update(id: number,flight: flightEditDTO) {   
+    return this.http.put<any>(`${this.apiURL}/${id}`, flight, {
+      observe: 'response',
+    }).pipe(
+      catchError(this.handleError)
+    );;
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -52,7 +52,7 @@ export class IndexFlightsComponent implements OnInit {
 
   loadRecords() {
     this.isLoading = true;
-    this.service.getAll().pipe(delay(0)).subscribe((response: HttpResponse<flightDTO[]>) => {
+    this.service.getAll().pipe(delay(1000)).subscribe((response: HttpResponse<flightDTO[]>) => {
       this.flights.data = response.body ?? [];
       this.flights.paginator = this.paginator;
       this.flights.sort = this.sort;

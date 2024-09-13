@@ -1,0 +1,2 @@
+<!-- <mat-spinner *ngIf="!flightLoad"></mat-spinner> -->
+<app-form-flight *ngIf="flightLoad" [modelo]="flightLoad" (OnSubmit)="editFlight($event)"></app-form-flight>
