@@ -1,8 +1,8 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/enviroment';
-import { flightDTO } from '../Interfaces/flight';
+import { flightCreationDTO, flightDTO } from '../Interfaces/flight';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +24,34 @@ export class FlightsService {
     });
   }
 
+  public create(flight: flightCreationDTO) {
+    console.log('Servicio Crear vuelo');
+    return this.http.post<any>(this.apiURL, flight, {
+      observe: 'response',
+    }).pipe(
+      catchError(this.handleError)
+    );;
+  }
+
   public getById(id: number): Observable<HttpResponse<flightDTO>> {
     return this.http.get<flightDTO>(this.apiURL + '/' + id, {
       observe: 'response',
     });
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      // Error del lado del cliente
+      errorMessage = `Client-side error: ${error.error.message}`;
+    } else {
+      // Error del lado del servidor
+      if (error.status === 500 && error.error.includes('Cannot insert duplicate key row')) {
+        errorMessage = 'A flight with this number already exists.';
+      } else {
+        errorMessage = `Server-side error: ${error.message}`;
+      }
+    }
+    return throwError(errorMessage);
   }
 }
