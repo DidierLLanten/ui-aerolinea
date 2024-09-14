@@ -1,12 +1,8 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/enviroment';
-import { userCreationDTO, userDTO } from '../Interfaces/user';
+import { userCreationDTO, userDTO, userEditDTO } from '../Interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -40,6 +36,14 @@ export class UserService {
     return this.http.get<userDTO>(this.apiURL + '/' + id, {
       observe: 'response',
     });
+  }
+
+  public update(id: number,user: userEditDTO) {   
+    return this.http.put<any>(`${this.apiURL}/${id}`, user, {
+      observe: 'response',
+    }).pipe(
+      catchError(this.handleError)
+    );;
   }
 
   private handleError(error: HttpErrorResponse) {

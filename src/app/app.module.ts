@@ -18,6 +18,7 @@ import { EditFlightComponent } from './View/flight/edit-flight/edit-flight.compo
 import { FormUserComponent } from './View/user/form-user/form-user.component';
 import { CreateUserComponent } from './View/user/create-user/create-user.component';
 import { IndexUsersComponent } from './View/user/index-users/index-users.component';
+import { EditUserComponent } from './View/user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { IndexUsersComponent } from './View/user/index-users/index-users.compone
     FormUserComponent,
     CreateUserComponent,
     IndexUsersComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,

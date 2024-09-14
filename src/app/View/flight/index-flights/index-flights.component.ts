@@ -17,13 +17,7 @@ import { delay } from 'rxjs';
 export class IndexFlightsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  readonly dialog = inject(MatDialog);
-
-  constructor(
-    private service: FlightsService,
-    private dialogService: DialogConfirmService
-  ) {}
-
+  
   displayedColumns = [
     'id',
     'flightNumber',
@@ -37,9 +31,13 @@ export class IndexFlightsComponent implements OnInit {
     'totalSeats',
     'actions',
   ];
+
   flights = new MatTableDataSource<flightDTO>();
   flight: flightDTO | undefined;
-  isLoading = true; // Bandera para el estado de carga
+  isLoading = true;
+  readonly dialog = inject(MatDialog);
+
+  constructor( private service: FlightsService, private dialogService: DialogConfirmService) {}
 
   ngOnInit(): void {
     this.loadRecords();
@@ -52,22 +50,15 @@ export class IndexFlightsComponent implements OnInit {
 
   loadRecords() {
     this.isLoading = true;
-    this.service.getAll().pipe(delay(1000)).subscribe((response: HttpResponse<flightDTO[]>) => {
-      this.flights.data = response.body ?? [];
-      this.flights.paginator = this.paginator;
-      this.flights.sort = this.sort;
-      this.isLoading = false; // Desactivar el estado de carga
-    });
-  }
-
-  getById(id: number) {
-    this.service.getById(id).subscribe((response: HttpResponse<flightDTO>) => {
-      if (response.body) {
-        this.flight = response.body;
-      } else {
-        console.error('No flight data found');
-      }
-    });
+    this.service
+      .getAll()
+      .pipe(delay(1000))
+      .subscribe((response: HttpResponse<flightDTO[]>) => {
+        this.flights.data = response.body ?? [];
+        this.flights.paginator = this.paginator;
+        this.flights.sort = this.sort;
+        this.isLoading = false; // Desactivar el estado de carga
+      });
   }
 
   delete(id: number) {

@@ -1,11 +1,11 @@
 export interface userDTO {
-  Id: number;
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  PasswordHash: string;
-  Role: string;
-  Reservations: string;
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  passwordHash: string;
+  role: string;
+  reservations: string;
 }
 
 export interface userCreationDTO {  
@@ -13,4 +13,9 @@ export interface userCreationDTO {
   LastName?: string;
   Email?: string;
   PasswordHash?: string | null;   
+}
+
+export interface userEditDTO {  
+  FirstName?: string;
+  LastName?: string;
 }

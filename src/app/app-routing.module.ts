@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexFlightsComponent } from './View/flight/index-flights/index-flights.component';
 import { CreateFlightComponent } from './View/flight/create-flight/create-flight.component';
 import { EditFlightComponent } from './View/flight/edit-flight/edit-flight.component';
-import { FormUserComponent } from './View/user/form-user/form-user.component';
 import { CreateUserComponent } from './View/user/create-user/create-user.component';
 import { IndexUsersComponent } from './View/user/index-users/index-users.component';
+import { EditUserComponent } from './View/user/edit-user/edit-user.component';
 
 const routes: Routes = [
   { path: '', component: IndexFlightsComponent }, 
@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'flights/edit/:id', component: EditFlightComponent },
 
   { path: 'users', component: IndexUsersComponent },
-  { path: 'users/create', component: CreateUserComponent },  
+  { path: 'users/create', component: CreateUserComponent },
+  { path: 'users/edit/:id', component: EditUserComponent },
 
 
   { path: '**', redirectTo: '' },

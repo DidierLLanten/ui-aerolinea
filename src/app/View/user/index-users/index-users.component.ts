@@ -15,15 +15,9 @@ import { UserService } from 'src/app/Service/user.service';
   styleUrls: ['./index-users.component.css'],
 })
 export class IndexUsersComponent implements OnInit {
-  ngOnInit(): void {
-    this.loadRecords();
-  }
-
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  readonly dialog = inject(MatDialog);
-
-  constructor(private service: UserService, private dialogService: DialogConfirmService) {}
+  @ViewChild(MatSort) sort!: MatSort;   
 
   displayedColumns = [
     'id',
@@ -38,7 +32,14 @@ export class IndexUsersComponent implements OnInit {
 
   users = new MatTableDataSource<userDTO>();
   flight: userDTO | undefined;
-  isLoading = true; // Bandera para el estado de carga
+  isLoading = true;
+  readonly dialog = inject(MatDialog);
+
+  constructor(private service: UserService, private dialogService: DialogConfirmService) {}
+
+  ngOnInit(): void {
+    this.loadRecords();
+  }
 
   applyFilter(event: Event) {    
     const filterValue = (event.target as HTMLInputElement).value;    
@@ -54,29 +55,16 @@ export class IndexUsersComponent implements OnInit {
       this.isLoading = false; // Desactivar el estado de carga
     });
   }
-
-  getById(id: number) {
-    this.service.getById(id).subscribe((response: HttpResponse<userDTO>) => {
-      if (response.body) {
-        this.flight = response.body;
-      } else {
-        console.error('No user data found');
-      }
-    });
-  }
-
-  delete(id: number) {
-    // alert('llamado accion borrar flight con id ' + id);
-    this.service.delete(id).subscribe((response: HttpResponse<any>) => {
-      console.log(response);
+  
+  delete(id: number) {    
+    this.service.delete(id).subscribe((response: HttpResponse<any>) => {      
       if (response.ok) {
         this.loadRecords();
       }
     });
   }
 
-  confirmDelete(id: number) {
-    alert("confirmDelete llamado...")
+  confirmDelete(id: number) {    
     this.dialogService.openConfirmDialog(id, (id) => this.delete(id));
   }
 }
