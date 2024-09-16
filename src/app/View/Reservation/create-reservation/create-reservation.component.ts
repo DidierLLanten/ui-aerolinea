@@ -6,6 +6,7 @@ import { ReservationCreationDTO } from 'src/app/Interfaces/reservation';
 import { SeatDTO } from 'src/app/Interfaces/seat';
 import { ReservationService } from 'src/app/Service/reservation.service';
 import { SeatService } from 'src/app/Service/seat.service';
+import { UserService } from 'src/app/Service/user.service';
 
 @Component({
   selector: 'app-create-reservation',
@@ -13,7 +14,7 @@ import { SeatService } from 'src/app/Service/seat.service';
   styleUrls: ['./create-reservation.component.css'],
 })
 export class CreateReservationComponent implements OnInit,OnChanges{
-  constructor(private reservationService: ReservationService, private seatService: SeatService,private rotuer: Router, private activedRoute: ActivatedRoute) {}
+  constructor(private reservationService: ReservationService, private seatService: SeatService, private userService: UserService, private activedRoute: ActivatedRoute) {}
 
   flightId: number = 0;
   abc?: SeatDTO[];
@@ -21,15 +22,17 @@ export class CreateReservationComponent implements OnInit,OnChanges{
   isLoading = true;
   createReservation?: ReservationCreationDTO;
   selectedSeats: SeatDTO[] = [];
+  idUserActived: string = ''
 
   ngOnInit(): void {
+    this.idUserActived = this.userService.obtenerValueOfStorage("ID");
     this.activedRoute.params.subscribe((parametros) => {
       this.flightId = parametros['id'];
       this.loadRecords(this.flightId)
-    });
-    // throw new Error('Method not implemented.');
+    });    
     this.createReservation = {
-      userId : 20
+      // userId : 20
+      userId : Number(this.idUserActived)
     }
   }
 
