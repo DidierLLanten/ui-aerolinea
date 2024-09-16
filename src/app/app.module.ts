@@ -21,6 +21,7 @@ import { IndexUsersComponent } from './View/user/index-users/index-users.compone
 import { EditUserComponent } from './View/user/edit-user/edit-user.component';
 import { CreateReservationComponent } from './View/reservation/create-reservation/create-reservation.component';
 import { IndexReservationsComponent } from './View/reservation/index-reservations/index-reservations.component';
+import { LoginComponent } from './Security/login/login.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { IndexReservationsComponent } from './View/reservation/index-reservation
     EditUserComponent,
     CreateReservationComponent,
     IndexReservationsComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

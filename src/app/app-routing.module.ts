@@ -8,9 +8,13 @@ import { IndexUsersComponent } from './View/user/index-users/index-users.compone
 import { EditUserComponent } from './View/user/edit-user/edit-user.component';
 import { CreateReservationComponent } from './View/reservation/create-reservation/create-reservation.component';
 import { IndexReservationsComponent } from './View/reservation/index-reservations/index-reservations.component';
+import { LoginComponent } from './Security/login/login.component';
 
 const routes: Routes = [
-  { path: '', component: IndexFlightsComponent }, 
+  { path: '', component: IndexFlightsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'login/create', component: CreateUserComponent },
+
   { path: 'flights', component: IndexFlightsComponent },
   { path: 'flights/create', component: CreateFlightComponent },  
   { path: 'flights/edit/:id', component: EditFlightComponent },

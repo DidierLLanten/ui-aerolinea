@@ -19,3 +19,8 @@ export interface userEditDTO {
   FirstName?: string;
   LastName?: string;
 }
+
+export interface userLoginDTO {  
+  email?: string | null;
+  password?: string | null;
+}

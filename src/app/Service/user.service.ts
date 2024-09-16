@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/enviroment';
-import { userCreationDTO, userDTO, userEditDTO } from '../Interfaces/user';
+import { userCreationDTO, userDTO, userEditDTO, userLoginDTO } from '../Interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +11,10 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   private apiURL = environment.apiURL + 'Users';
+  private readonly llaveToken = 'token';
+
+  private idUserActivedSource = new BehaviorSubject<string>('');
+  idUserActived$ = this.idUserActivedSource.asObservable();
 
   public getAll(): Observable<HttpResponse<userDTO[]>> {
     return this.http.get<userDTO[]>(this.apiURL, {
@@ -46,6 +50,14 @@ export class UserService {
     );;
   }
 
+  public authenticate(user: userLoginDTO) {
+    return this.http
+      .post<any>(this.apiURL+"/login", user, {
+        observe: 'response',
+      })
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
@@ -63,5 +75,30 @@ export class UserService {
       }
     }
     return throwError(errorMessage);
+  }
+
+  guardarToken(token: string, id: string, rol: string) {
+    localStorage.setItem(this.llaveToken, token);
+    localStorage.setItem("ID", id);
+    localStorage.setItem("ROLE", rol);
+    // this.rolSubject.next(this.obtenerRol());
+    this.setUser(id);
+  }
+
+  obtenerValueOfStorage(key: string): string {
+    const value = localStorage.getItem(key);
+    return value ? value : '';
+  }
+
+  setUser(id: string): void {
+    this.idUserActivedSource.next(id); // Actualiza el BehaviorSubject
+    localStorage.setItem('ID', id);
+  }
+
+  clearUser(): void {
+    this.idUserActivedSource.next(''); // Resetea el BehaviorSubject
+    localStorage.removeItem('ID');
+    localStorage.removeItem('ROLE');
+    localStorage.removeItem(this.llaveToken);
   }
 }

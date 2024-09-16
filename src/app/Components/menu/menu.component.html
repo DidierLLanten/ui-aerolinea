@@ -32,10 +32,24 @@
           <mat-icon>search</mat-icon>Buscar
         </a>
       </div> -->
-      <button mat-icon-button aria-label="Example icon-button with heart icon">
+      <button *ngIf="idUserActived != ''" mat-icon-button aria-label="User menu" [matMenuTriggerFor]="userMenu">
         <mat-icon>person</mat-icon>
       </button>
-      <button mat-icon-button aria-label="Example icon-button with heart icon">
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item [routerLink]="['/users/edit', idUserActived]">
+          <mat-icon>edit</mat-icon>
+          <span>Editar perfil</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/reservations']">
+          <mat-icon>list_alt</mat-icon>
+          <span>Ver reservas</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+      </mat-menu>
+      <button *ngIf="idUserActived == ''" mat-icon-button aria-label="Example icon-button with heart icon" [routerLink]="'login'" matTooltip="Login">
         <mat-icon>person_outline</mat-icon>
       </button>
       <!-- <div class="espacio"></div> -->

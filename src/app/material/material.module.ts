@@ -20,6 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 
 
@@ -48,6 +49,7 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerMod
     MatNativeDateModule,
     MatButtonToggleModule,
     MatCheckboxModule,
+    MatMenuModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,    
     NgxMatNativeDateModule,

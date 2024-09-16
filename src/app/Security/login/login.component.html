@@ -1,0 +1,63 @@
+<form [formGroup]="userForm" novalidate (ngSubmit)="login()" class="seat-container">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+  
+        <div class="row">          
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="name@example.com" formControlName="email" required>
+                    <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="userForm.controls['email'].hasError('email')">
+                        Not a valid email
+                    </mat-error>
+                    <mat-error *ngIf="userForm.get('email')?.hasError('max')">
+                        Email must be exactly 6 digits
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div class="row">          
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <input matInput [type]="hide() ? 'password' : 'text'"  placeholder="Password" formControlName="password">
+                    <button
+                      type = "button"
+                      mat-icon-button
+                      matSuffix
+                      (click)="clickEvent($event)"
+                      [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide()"
+                    ><mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="userForm.controls['password'].hasError('required')">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="userForm.get('password')?.hasError('minlength')">
+                        Password must be exactly 6 digits
+                    </mat-error>
+                    <mat-error *ngIf="userForm.get('password')?.hasError('max')">
+                        Password must be exactly 6 digits
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+  
+      </mat-card-content>
+
+      <div class="seat-container">
+        <button mat-raised-button color="primary" type="submit" routerLink="">Cancelar</button>        
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
+        <div class="colum-flex">        
+        <button mat-raised-button color="primary" type="submit" routerLink="/users/create">Create account</button>
+      </div>
+    </mat-card>
+  </form>
+  

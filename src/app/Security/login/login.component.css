@@ -1,0 +1,30 @@
+.full-width {
+    width: 100%;
+  }
+  
+  .shipping-card {
+    min-width: 120px;
+    margin: 20px auto;
+  }
+  
+  .col {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .col:last-child {
+    margin-right: 0;
+  }
+
+  .seat-container {
+    display: flex;    
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;  
+  }
+
+  .colum-flex {
+    display: flex;    
+    justify-content: center;    
+    margin-bottom: 20px;
+  }
