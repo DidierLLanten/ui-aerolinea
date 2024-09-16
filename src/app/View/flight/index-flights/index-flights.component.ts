@@ -8,6 +8,7 @@ import { HttpResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmService } from 'src/app/Service/dialog-confirm.service';
 import { delay } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index-flights',
@@ -37,7 +38,7 @@ export class IndexFlightsComponent implements OnInit {
   isLoading = true;
   readonly dialog = inject(MatDialog);
 
-  constructor( private service: FlightsService, private dialogService: DialogConfirmService) {}
+  constructor( private service: FlightsService, private dialogService: DialogConfirmService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadRecords();
@@ -46,6 +47,10 @@ export class IndexFlightsComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.flights.filter = filterValue.trim().toLowerCase();
+  }
+
+  navigateToReservation(flightId: number) {    
+    this.router.navigate([`/reservations/create/${flightId}`]);
   }
 
   loadRecords() {
@@ -57,12 +62,11 @@ export class IndexFlightsComponent implements OnInit {
         this.flights.data = response.body ?? [];
         this.flights.paginator = this.paginator;
         this.flights.sort = this.sort;
-        this.isLoading = false; // Desactivar el estado de carga
+        this.isLoading = false;
       });
   }
 
-  delete(id: number) {
-    // alert('llamado accion borrar flight con id ' + id);
+  delete(id: number) {    
     this.service.delete(id).subscribe((response: HttpResponse<any>) => {
       if (response.ok) {
         this.loadRecords();
@@ -70,7 +74,8 @@ export class IndexFlightsComponent implements OnInit {
     });
   }
 
-  confirmDelete(id: number) {
+  confirmDelete(event: Event, id: number) {
+    event.stopPropagation();
     this.dialogService.openConfirmDialog(id, (id) => this.delete(id));
   }
 }

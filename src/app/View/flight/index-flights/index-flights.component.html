@@ -74,7 +74,7 @@
               <mat-icon>edit</mat-icon>
             </button>
             
-            <button mat-fab aria-label="Delete button" (click)="confirmDelete(element.id)" color="warn"  matTooltip="Delete" >
+            <button mat-fab aria-label="Delete button" (click)="confirmDelete($event, element.id)" color="warn"  matTooltip="Delete" >
               <mat-icon>delete</mat-icon>
             </button>
 
@@ -84,7 +84,10 @@
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+        (click)="navigateToReservation(row.id)" class="clickable-row"  matTooltip="Click to see availability"></tr>
+  
       </table>
     
       <mat-paginator #paginator

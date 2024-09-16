@@ -1,0 +1,29 @@
+<app-load-generic-list [listado]="formattedSeats" [load]="isLoading"  class="seat-container">  
+  <ng-container contenido>
+      
+    <div class="seat-container">
+        <h1>Reservation</h1>
+    </div>
+
+    <div class="seat-container" *ngIf="formattedSeats.length">
+      <div *ngFor="let row of formattedSeats; let i = index" class="seat-row">
+        <mat-button-toggle-group #group="matButtonToggleGroup" multiple>
+          <mat-button-toggle
+            *ngFor="let seat of row; let j = index"
+            [value]="seat"
+            [disabled]="!seat.isAvailable"
+            (click)="toggleSeat(seat)"
+            [matTooltip]="seat.isAvailable ? 'Click to select or deselect this seat' : 'Seat occupied'"
+            matTooltipPosition="above"
+          >
+            <mat-icon *ngIf="!seat.isAvailable">event_seat</mat-icon>
+            <span *ngIf="seat.isAvailable">{{ seat.seatNumber }}</span>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      <button mat-fab extended [disabled]="selectedSeats.length === 0" (click)="create()" color="primary" matTooltip="Make a reservation">    <mat-icon>confirmation_number</mat-icon>    SAVE  </button>
+    </div>
+
+  </ng-container>
+</app-load-generic-list>
+
