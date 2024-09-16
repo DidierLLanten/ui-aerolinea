@@ -1,0 +1,14 @@
+.full-width-table {
+  width: 100%;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 8px 8px 8px 0;
+}
+
+.width {
+  width: 90%;
+}

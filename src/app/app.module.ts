@@ -19,7 +19,8 @@ import { FormUserComponent } from './View/user/form-user/form-user.component';
 import { CreateUserComponent } from './View/user/create-user/create-user.component';
 import { IndexUsersComponent } from './View/user/index-users/index-users.component';
 import { EditUserComponent } from './View/user/edit-user/edit-user.component';
-import { CreateReservationComponent } from './View/Reservation/create-reservation/create-reservation.component';
+import { CreateReservationComponent } from './View/reservation/create-reservation/create-reservation.component';
+import { IndexReservationsComponent } from './View/reservation/index-reservations/index-reservations.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CreateReservationComponent } from './View/Reservation/create-reservatio
     IndexUsersComponent,
     EditUserComponent,
     CreateReservationComponent,
+    IndexReservationsComponent,
   ],
   imports: [
     BrowserModule,
