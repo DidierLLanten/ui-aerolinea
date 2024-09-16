@@ -20,15 +20,25 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a routerLink="" mat-button>
-        <mat-icon>airplane_ticket</mat-icon><span>Aerolinea</span>
-      </a>
-      <div>
+      
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="">
+        <mat-icon>airplane_ticket</mat-icon><span>Airline</span>
+      </button>
+
+      <span class="example-spacer"></span>
+
+      <!-- <div>
         <a mat-button routerLink="peliculas/buscar">
           <mat-icon>search</mat-icon>Buscar
         </a>
-      </div>
-      <div class="espacio"></div>
+      </div> -->
+      <button mat-icon-button aria-label="Example icon-button with heart icon">
+        <mat-icon>person</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Example icon-button with heart icon">
+        <mat-icon>person_outline</mat-icon>
+      </button>
+      <!-- <div class="espacio"></div> -->
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
